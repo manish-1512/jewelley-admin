@@ -3,33 +3,39 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Models\AboutUSModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutUSController extends Controller
 {   
-    public $about_us;
 
-    public function __construct()
-    {
-        $this->about_us = new AboutUSModel();
-    }  
-   
-    public function create(Request $req){
+ 
+    public function view(){ 
 
-        $req->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
+        $file= Storage::disk('local')->get('aboutus.txt');
+  
+           if($file){
 
-        $this->about_us->title = $req->title;
-        $this->about_us->description = $req->description;
-        
-           $id =  $this->about_us->save();
+               $about_us_data =  json_decode($file);
+    
+           return view('admin.AboutUS',compact('about_us_data'));          
+           }
+           
+           return view('admin.AboutUS');
+           
+    }
 
-            return $id;
+    public function update(Request $req){
 
+                  $data =   json_encode($req->all());
+
+                  Storage::disk('local')->put('aboutus.txt',$data);
+                                  
+                  return redirect()->route('about_us.view');
 
     }
 
+
+
+    
 }

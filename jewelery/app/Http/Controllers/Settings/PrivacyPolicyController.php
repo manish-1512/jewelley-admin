@@ -3,35 +3,41 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Models\PrivacyPolicyModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PrivacyPolicyController extends Controller
 {   
-    public $privacy_policy;
+  
 
-    public function __construct()
-    {
-        $this->privacy_policy = new PrivacyPolicyModel();
-    }
+ 
+    public function view(){ 
 
+        $file= Storage::disk('local')->get('filename.txt');
+  
+           if($file){
 
-    //error 
-    public function create(Request $req){
-
-        $req->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
-
-
-        $this->privacy_policy->title = $req->title;
-        $this->privacy_policy->description = $req->description;
-        
-          $this->privacy_policy->save();
-
+               $privacy_policy_data =  json_decode($file);
+    
+           return view('admin.PrivacyPolicy',compact('privacy_policy_data'));          
+           }
            
+           return view('admin.PrivacyPolicy');
+           
+    }
+
+    public function update(Request $req){
+
+                  $data =   json_encode($req->all());
+
+                  Storage::disk('local')->put('filename.txt',$data);
+                  
+                    
+                  return redirect()->route('privacy_policy.view');
 
     }
+
+
+
     
 }

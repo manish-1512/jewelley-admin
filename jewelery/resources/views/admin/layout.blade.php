@@ -221,14 +221,14 @@ border-bottom-right-radius: 15px;
 
               <li class="nav-item">
 
-                <a href="{{route('pr.list')}}" class="nav-link">
+                <a href="{{route('privacy_policy.view')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Privacy Policy</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{route('product.list')}}" class="nav-link">
+                <a href="{{route('about_us.view')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>About US</p>
                 </a>
@@ -239,9 +239,9 @@ border-bottom-right-radius: 15px;
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('product_category.list')}}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p> </p>
+              <p> Product Categories</p>
             </a>
           </li>
           <li class="nav-header">LABELS</li>

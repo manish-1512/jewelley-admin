@@ -17,15 +17,11 @@ class ProductController extends Controller{
         }
 
     
-    public function index($message = null){    
-
-        
+    public function index(){    
+      
         $product_data =  $this->product_model::get();
 
-        $product_data->message = $message;  
-      
         return view('admin.products',compact('product_data'));
-
   }
 
   public function viewProduct(){
@@ -34,42 +30,70 @@ class ProductController extends Controller{
 
   public function Changestatus(Request $req){
 
-                       $data =  $this->product_model::select('is_active')->where('id',$req->id)->get();
+                       $data =  $this->product_model::select('is_active')->where('id',$req->id)->first()->toArray();;
 
-                       $data =  json_decode(json_encode($data), true);
-                        $status =  $data[0]['is_active'];
+                      $status =($data['is_active'] == '1')?'0':'1';
 
-            $this->product_model::where('id',$req->id)->update(['is_active'=> 1- $status ]);
+                $this->product_model::where('id',$req->id)->update(['is_active'=> $status ]);
 
-            return redirect()->back();
+                return redirect()->back();
 
   } 
 
   public function create(Request $req){
 
-        
-      $req->validate([
-         
+               if($req->validate([
+              
+                 
+                "title" => "required",
+                "description" => "required" ,
+                "price" => "required" ,
+                "weight" => "required" ,
+                "discount" => "required", 
+                "product_category" => "required", 
+                "product_type" => "required" ,
+                "product_matrial" => "required", 
+                "is_active" => "required" ,
+                "is_new" => "required" ,
+                "is_popular" => "required", 
+                "is_best_seller" => "required" 
+               
+             ])){
+
+             
+               
+                //save method called    
+
+                $this->product_model->title =$req->title ;
+                $this->product_model->description = $req->description;
+                $this->product_model->price =$req->price;
+                $this->product_model->weight =$req->weight;
+                $this->product_model->discount =$req->discount; 
+                $this->product_model->product_category = $req->product_category; 
+                $this->product_model->product_type = $req->product_type ;
+                $this->product_model->product_matrial =$req->product_matrial ; 
+                $this->product_model->is_active = $req->is_active ;
+                $this->product_model->is_new = $req->is_new;
+                $this->product_model->is_popular = $req->is_popular; 
+                $this->product_model->is_best_seller = $req->is_best_seller; 
+
+                if($req->id){   
+                    
+                   
+                
+
+                    $this->product_model->update();
+
+                }else{
+
+                    $this->product_model->save();
+                }
+
+                return redirect()->back()->with('status','Successfully');
 
 
-      ]);
+      }
 
-
-      $this->product_model->first_name = $req->first_name;
-      $this->product_model->last_name = $req->last_name;
-      $this->product_model->email = $req->email;
-      $this->product_model->gender = $req->gender;
-      $this->product_model->mobile = $req->mobile;
-      $this->product_model->pincode = $req->pincode;
-      $this->product_model->country = $req->country;
-      $this->product_model->state = $req->state;
-      $this->product_model->city = $req->city;
-      $this->product_model->address = $req->address;
-      $this->product_model->is_verified = $req->is_verified;
-      $this->product_model->is_active = $req->is_active;
-      
-      
-        $this->product_model->save();
 
   }
 
@@ -77,9 +101,10 @@ class ProductController extends Controller{
   public function edit(Request $req){
 
       $id =  $req->id;
-      $data  = $this->product_model::where('id', $id)->get();
-      
-     //return data to view   
+  
+      $data_to_edit  = $this->product_model::where('id', $id)->first()->toArray();
+       
+     return view('admin.EditProduct',['data_to_edit' => $data_to_edit] );
       
   }
 

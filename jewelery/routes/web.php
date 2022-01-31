@@ -35,10 +35,17 @@ Route::get('/admin/category/delete/{id}','App\Http\Controllers\CategoryControlle
 
 
 
-//about us controller 
-Route::post('/admin/about_us','App\Http\Controllers\Settings\AboutUSController@create')->name('about_us.create');
 //privacy policy controller 
-Route::post('/admin/privacy_policy','App\Http\Controllers\Settings\PrivacyPolicyController@create')->name('privacy_policy.create');
+
+Route::get('/admin/privacy_policy','App\Http\Controllers\Settings\PrivacyPolicyController@view')->name('privacy_policy.view');
+Route::Post('/admin/privacy_policy/update','App\Http\Controllers\Settings\PrivacyPolicyController@update')->name('privacy_policy.update');
+
+
+
+Route::get('/admin/about_us','App\Http\Controllers\Settings\AboutUSController@view')->name('about_us.view');
+Route::post('/admin/about_us/update','App\Http\Controllers\Settings\AboutUSController@update')->name('about_us.update');
+
+// Route::post('/admin/privacy_policy','App\Http\Controllers\Settings\PrivacyPolicyController@create')->name('privacy_policy.create');
 
 
 //user controller
@@ -67,9 +74,29 @@ Route::Post('/admin/Products/create','App\Http\Controllers\Products\ProductContr
 Route::get('/admin/Products/view','App\Http\Controllers\Products\ProductController@viewProduct')->name('product.view_detail');
 
 Route::get('/admin/Products/status/{id}','App\Http\Controllers\Products\ProductController@changeStatus')->name('product.status');
-Route::get('/admin/Products/edit','App\Http\Controllers\Products\ProductController@edit')->name('product.edit');
-Route::get('/admin/Products/delete','App\Http\Controllers\Products\ProductController@delete')->name('product.delete');
 
+
+Route::get('/admin/Products/edit/{id}','App\Http\Controllers\Products\ProductController@edit')->name('product.edit');
+
+Route::Post('/admin/Products/update','App\Http\Controllers\Products\ProductController@update')->name('product.update');
+
+
+
+Route::get('/admin/Products/delete/{id}','App\Http\Controllers\Products\ProductController@delete')->name('product.delete');
+
+//////////////////////
+Route::get('/admin/Products_categories/','App\Http\Controllers\Products\ProductCategoryController@index')->name('product_category.list');
+
+
+Route::view('/admin/Products_categories/save','admin.SaveProductCategory')->name('product_category.save');
+
+
+ Route::Post('/admin/Products_categories/create','App\Http\Controllers\Products\ProductCategoryController@create')->name('product_category.create');
+
+ Route::get('/admin/Products_categories/status/{id}','App\Http\Controllers\Products\ProductCategoryController@ChangeStatus')->name('product_category.status');
+
+// Route::get('/admin/Products_categories/edit','App\Http\Controllers\Products\ProductCategoryController@edit')->name('product_category.edit');
+// Route::get('/admin/Products_categories/delete/{id}','App\Http\Controllers\Products\ProductCategoryController@delete')->name('product_category.delete');
 
 ////////////////////////////////
 

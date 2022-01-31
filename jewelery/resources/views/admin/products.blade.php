@@ -32,10 +32,7 @@
           <!--Table body-->
           <tbody>
             
-            @if($product_data->message)
-
-            {{$message}}
-            @endif
+         
            <?php $i=0; ?>
 
           @foreach ($product_data as $product)
@@ -63,17 +60,13 @@
             <td>
 
             
-                <form action="" method="POST">
    
                     <a class="btn btn-info" href="{{ route('product.view_detail',$product->id) }}">Show</a>
     
                     <a class="btn btn-primary" href="{{ route('product.edit',$product->id) }}">Edit</a>
                     <a class="btn btn-primary" href="{{ route('product.status',$product->id) }}">Status</a>
-                    @csrf
-                    @method('DELETE')   
-                          
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                    <a class="btn btn-primary" href="{{ route('product.delete',$product->id) }}">Delete</a>
+
             </td>
             
         </tr>
