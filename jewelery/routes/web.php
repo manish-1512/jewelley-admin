@@ -44,7 +44,8 @@ Route::post('/admin/privacy_policy','App\Http\Controllers\Settings\PrivacyPolicy
 //user controller
 //list of user
 Route::get('/admin/users/','App\Http\Controllers\UserController@index')->name('users.show');
-//save user form
+//show user orders
+Route::get('/admin/user/orders/{user_id}','App\Http\Controllers\UserController@userOrders')->name('user.orders');
 
 
     
@@ -69,3 +70,12 @@ Route::get('/admin/Products/status/{id}','App\Http\Controllers\Products\ProductC
 Route::get('/admin/Products/edit','App\Http\Controllers\Products\ProductController@edit')->name('product.edit');
 Route::get('/admin/Products/delete','App\Http\Controllers\Products\ProductController@delete')->name('product.delete');
 
+
+////////////////////////////////
+
+use App\Http\Controllers\RazorpayController;
+
+Route::get('product', 'App\Http\Controllers\Website\RazorpayController@index');
+
+Route::get('paysuccess', 'App\Http\Controllers\Website\RazorpayController@razorPaySuccess');
+Route::get('razor-thank-you', 'App\Http\Controllers\Website\RazorpayController@RazorThankYou');

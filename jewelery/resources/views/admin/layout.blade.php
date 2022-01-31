@@ -213,24 +213,35 @@ border-bottom-right-radius: 15px;
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Charts
+                Settings
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
+
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+
+                <a href="{{route('pr.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                  <p>Privacy Policy</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{route('product.list')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>About US</p>
+                </a>
+              </li>
+
+              
             </ul>
           </li>
           
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p>Level 1</p>
+              <p> </p>
             </a>
           </li>
           <li class="nav-header">LABELS</li>

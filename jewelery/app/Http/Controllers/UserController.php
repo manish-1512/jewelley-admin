@@ -22,7 +22,16 @@ class UserController extends Controller{
 
         return view('admin.users',compact('user_data'));
 
-  }
+    }
+
+// show user orders history
+
+    public function userOrders(Request $req){
+
+        return view('admin.UserOrders'  );
+    }
+
+
 
   public function create(Request $req){
 

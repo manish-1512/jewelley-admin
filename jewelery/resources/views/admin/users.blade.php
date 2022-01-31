@@ -26,7 +26,7 @@
               <th>State</th>
               <th>City</th>
               
-              <th>Image</th>
+              <th>Action</th>
             </tr>
           </thead>
           @if ($user_data)
@@ -52,14 +52,14 @@
 
             
                 <form action="" method="POST">
-   
-                    <a class="btn btn-info" href="">Show</a>
-    
-                    <a class="btn btn-primary" href="">Edit</a>
+      
+                <a class="btn btn-primary btn-sm" href="">Status</a>
+                <a class="btn btn-primary btn-sm" href="{{ route('user.orders',$user->id) }}">Orders</a>
+
                     @csrf
                     @method('DELETE')
       
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </td>
             
