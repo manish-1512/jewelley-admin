@@ -100,9 +100,14 @@ Route::view('/admin/Products_categories/save','admin.SaveProductCategory')->name
 
 ////////////////////////////////
 
+Route::get('/admin/System/banner/','App\Http\Controllers\System\BannerController@view')->name('banner_image.list');
+
 use App\Http\Controllers\RazorpayController;
 
 Route::get('product', 'App\Http\Controllers\Website\RazorpayController@index');
 
 Route::get('paysuccess', 'App\Http\Controllers\Website\RazorpayController@razorPaySuccess');
 Route::get('razor-thank-you', 'App\Http\Controllers\Website\RazorpayController@RazorThankYou');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
