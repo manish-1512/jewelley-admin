@@ -65,7 +65,7 @@ Route::view('/admin/dashboard','admin.dashboard')->name('dashboard.show');
 
 Route::get('/admin/Products/','App\Http\Controllers\Products\ProductController@index')->name('product.list');
 
-Route::view('/admin/Products/save','admin.SaveProduct')->name('product.add_new');
+Route::get('/admin/Products/save','App\Http\Controllers\Products\ProductController@saveProductView')->name('product.add_new');
 
 
 Route::Post('/admin/Products/create','App\Http\Controllers\Products\ProductController@create')->name('product.create');
@@ -83,6 +83,22 @@ Route::Post('/admin/Products/update','App\Http\Controllers\Products\ProductContr
 
 
 Route::get('/admin/Products/delete/{id}','App\Http\Controllers\Products\ProductController@delete')->name('product.delete');
+//route for product type list
+
+Route::get('/admin/Products/product_type/','App\Http\Controllers\Products\ProductTypeController@index')->name('product_type.list');
+Route::view('/admin/Products/product_type/save','admin.SaveProductType')->name('product_type.save');
+
+
+ Route::Post('/admin/Products/product_type/create','App\Http\Controllers\Products\ProductTypeController@create')->name('product_type.create');
+
+ Route::get('/admin/Products/product_type/status/{id}','App\Http\Controllers\Products\ProductTypeController@ChangeStatus')->name('product_type.status');
+
+ Route::get('/admin/Products/product_type/edit/{id}','App\Http\Controllers\Products\ProductTypeController@edit')->name('product_type.edit');
+ Route::Post('/admin/Products/product_type/update/','App\Http\Controllers\Products\ProductTypeController@update')->name('product_type.update');
+ Route::get('/admin/Products/product_type/delete/{id}','App\Http\Controllers\Products\ProductTypeController@delete')->name('product_type.delete');
+
+
+
 
 //////////////////////
 Route::get('/admin/Products_categories/','App\Http\Controllers\Products\ProductCategoryController@index')->name('product_category.list');
@@ -90,17 +106,42 @@ Route::get('/admin/Products_categories/','App\Http\Controllers\Products\ProductC
 
 Route::view('/admin/Products_categories/save','admin.SaveProductCategory')->name('product_category.save');
 
-
  Route::Post('/admin/Products_categories/create','App\Http\Controllers\Products\ProductCategoryController@create')->name('product_category.create');
 
  Route::get('/admin/Products_categories/status/{id}','App\Http\Controllers\Products\ProductCategoryController@ChangeStatus')->name('product_category.status');
 
-// Route::get('/admin/Products_categories/edit','App\Http\Controllers\Products\ProductCategoryController@edit')->name('product_category.edit');
-// Route::get('/admin/Products_categories/delete/{id}','App\Http\Controllers\Products\ProductCategoryController@delete')->name('product_category.delete');
+ Route::get('/admin/Products_categories/edit/{id}','App\Http\Controllers\Products\ProductCategoryController@edit')->name('product_category.edit');
+ Route::Post('/admin/Products_categories/update/','App\Http\Controllers\Products\ProductCategoryController@update')->name('product_category.update');
+ Route::get('/admin/Products_categories/delete/{id}','App\Http\Controllers\Products\ProductCategoryController@delete')->name('product_category.delete');
 
-////////////////////////////////
+//     route for banner image       //////////////////////////////
 
-Route::get('/admin/System/banner/','App\Http\Controllers\System\BannerController@view')->name('banner_image.list');
+Route::get('/admin/System/banner/','App\Http\Controllers\System\BannerController@list')->name('banner.list');
+Route::get('/admin/System/banner/create','App\Http\Controllers\System\BannerController@create')->name('banner.create');
+
+Route::Post('/admin/System/banner/store','App\Http\Controllers\System\BannerController@store')->name('banner.store');
+
+Route::get('/admin/System/banner/delete/{id}','App\Http\Controllers\System\BannerController@delete')->name('banner.delete');
+
+Route::get('/admin/System/banner/show','App\Http\Controllers\System\BannerController@show')->name('banner.show');
+Route::get('/admin/System/banner/edit/{id}','App\Http\Controllers\System\BannerController@edit')->name('banner.edit');
+Route::Post('/admin/System/banner/update','App\Http\Controllers\System\BannerController@update')->name('banner.update'); //not done
+
+Route::view('/admin/System/banner/save','admin.System.Banner')->name('banner_image.save');
+
+
+
+///////////////orders/////////////////
+
+
+
+Route::get('/admin/Orders/','App\Http\Controllers\Orders\OrderController@list')->name('orders.list');
+
+
+
+
+/////////////////////////////////////////////
+
 
 use App\Http\Controllers\RazorpayController;
 

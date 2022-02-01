@@ -35,23 +35,28 @@
 
     <div class="form-group col-md-4">
     <label for="weight">Weight</label>
-    <input type="number" class="form-control"  placeholder="enter weight in grams" name="weight">
+    <input type="text" class="form-control"  placeholder="enter weight in grams" name="weight">
     </div>
 
     <div class="form-group col-md-4">
-        <label for="">Discountt</label>
-        <input type="number" class="form-control"  placeholder="enter discount" name="discount">
+        <label for="">Discount</label>
+        <input type="text" class="form-control"  placeholder="enter discount" name="discount">
     </div>
 
     <div class="form-group col-md-4">
         <label for="">Product Category</label>
 
         <select id="inputState" class="form-control" name="product_category">
-        <option selected>Choose...</option>
-        <option value="man">Man</option>
-        <option value="woman"> Woman/option>
-        <option value="abc"> abc </option>
-        <option value="earing"> earing</option>
+
+        @if($categories)
+
+              @foreach($categories as $category)
+
+              <option value="{{$category['id']}}"> {{$category['name']}}</option>
+              
+                @endforeach
+        @endif
+      
       </select>
        
     </div>
@@ -63,15 +68,20 @@
     <div class="form-group col-md-6">
       <label for="">Product Type</label>
 
-      <select id="inputState" class="form-control" name="product_type">
-        <option selected>Choose...</option>
-        <option value="earing"> earing</option>
-        <option value="abc"> abc/option>
-        <option value="asas"> asas </option>
-        <option value="aela"> earing</option>
+      <select class="form-control" name="product_type">
+
+      @if($product_types)
+      @foreach($product_types as $type)
+      
+         <option value="{{$type['id']}}"> {{$type['name']}}</option>
+
+        @endforeach
+      @endif
       </select>
 
     </div>
+
+
     <div class="form-group col-md-4">
       <label for="inputState">Product Matrial</label>
 

@@ -11,6 +11,12 @@
 </div>
 </div> 
 
+@if(session()->has('update'))
+
+<div class="alert-success col-1 ">
+  {{session('update')}}
+</div>
+@endif
 
 <!--table start here  -->
 

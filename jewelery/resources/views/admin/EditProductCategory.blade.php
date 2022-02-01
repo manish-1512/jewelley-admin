@@ -2,6 +2,8 @@
    
 @section('content')
 
+
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -12,22 +14,24 @@
     </div>
 @endif
 
+<h1>Update Product Category </h1>
 
 <div class="w-50 offset-2" >
 
-  <form  action="{{ route('product_category.create')}}" method="POST">
+  <form  action="{{ route('product_category.update')}}" method="POST">
   
     <div class="form-group">
-      <label for="name">Category Name</label>
-      <input type="text" class="form-control" placeholder="Enter category" name="name" id="name">
+      <label for="name">Type Name</label>
+      <input type="hidden" name="id" value="{{$data_for_edit['id']}}">
+      <input type="text" class="form-control" placeholder="Enter category" name="name" value="{{$data_for_edit['name']}}" id="name">
     </div>
     
     <div class="form-group">
       <label for="pwd">Is Active</label>
   
-      <select class="form-control" id="" name="is_active">
+      <select class="form-control" id="" name="is_active" value="{{$data_for_edit['name']}}">
         <option value="1">Yes</option>
-        <option value="2">NO</option>          
+        <option value="0">NO</option>          
       </select>
      
     </div>

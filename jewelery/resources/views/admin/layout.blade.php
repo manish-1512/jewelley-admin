@@ -200,6 +200,17 @@ border-bottom-right-radius: 15px;
               </li> 
 
               <li class="nav-item">
+                
+                <a href="{{route('product_type.list')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product Types</p>
+                </a>
+              </li> 
+
+
+
+
+              <li class="nav-item">
                 <a href="pages/layout/top-nav.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Top Navigation</p>
@@ -247,10 +258,8 @@ border-bottom-right-radius: 15px;
               </p>
             </a>
             <ul class="nav nav-treeview">
-
               <li class="nav-item">
-
-                <a href="{{route('banner_image.list')}}" class="nav-link">
+                <a href="{{route('banner.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Banner Image</p>
                 </a>
@@ -269,6 +278,14 @@ border-bottom-right-radius: 15px;
               <p> Product Categories</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('orders.list')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p> Orders </p>
+            </a>
+          </li>
+
           <li class="nav-header">LABELS</li>
          
         </ul>

@@ -2,6 +2,8 @@
    
 @section('content')
 
+
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -15,10 +17,10 @@
 
 <div class="w-50 offset-2" >
 
-  <form  action="{{ route('product_category.create')}}" method="POST">
+  <form  action="{{ route('product_type.create')}}" method="POST">
   
     <div class="form-group">
-      <label for="name">Category Name</label>
+      <label for="name">Type Name</label>
       <input type="text" class="form-control" placeholder="Enter category" name="name" id="name">
     </div>
     

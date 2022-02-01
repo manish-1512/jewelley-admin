@@ -2,13 +2,25 @@
 
 @section('content')
 
-<!-- save users -->
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <h2>edit product</h2>
-<form class="m-5" method="post" action="{{route('product.create')}}" >
+
+<form class="m-5" method="post" action="{{route('product.update')}}" >
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="title">Name</label>
-      <input type="hidden" value="{{$data_to_edit['id']}}">
+      <input type="hidden" value="{{$data_to_edit['id']}}" name="id">
       <input type="text" class="form-control" name="title" value="{{$data_to_edit['title']}}">
     </div>
     <div class="form-group col-md-6">
@@ -36,12 +48,17 @@
     <div class="form-group col-md-4">
         <label for="">Product Category</label>
 
-        <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option value="">Man</option>
-        <option value=""> Woman/option>
-        <option value=""> abc </option>
-        <option value=""> earing</option>
+        <select id="inputState" class="form-control" name="product_category">
+        @if($categories)
+
+      @foreach($categories as $category)
+
+      <option value="{{$category['id']}}"> {{$category['name']}}</option>
+
+        @endforeach
+      @endif
+
+
       </select>
        
     </div>
@@ -54,18 +71,20 @@
       <label for="">Product Type</label>
 
       <select id="inputState" class="form-control" name="product_type" >
-        <option selected>Choose...</option>
-        <option value=""> earing</option>
-        <option value=""> abc/option>
-        <option value=""> asas </option>
-        <option value=""> earing</option>
+        @if($product_types)
+      @foreach($product_types as $type)
+      
+         <option value="{{$type['id']}}"> {{$type['name']}}</option>
+
+        @endforeach
+      @endif
       </select>
 
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">Product Matrial</label>
 
-      <select id="inputState" class="form-control">
+      <select id="inputState" class="form-control" name="product_matrial">  
         <option value="gold">gold</option>
         <option value="silver">silver</option>
       

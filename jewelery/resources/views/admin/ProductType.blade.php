@@ -6,7 +6,7 @@
 <div class="col-lg-12 margin-tb">
    
     <div class="pull-left m-3">
-        <a class="btn btn-success" href="{{ route('product_category.save')}}"> Add New Category</a>
+        <a class="btn btn-success" href="{{ route('product_type.save')}}"> Add New Product Type</a>
     </div>
 
 </div>
@@ -24,18 +24,18 @@
               <th>Action</th>
             </tr>
           </thead>
-          @if ($product_category_data)
+          @if ($product_type_data)
           <!--Table body-->
           <tbody>
          
            <?php $i=0; ?>
 
-          @foreach ($product_category_data as $category)
+          @foreach ($product_type_data as $type)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $category->name }}</td>
+            <td>{{ $type->name }}</td>
             
-            @if($category->is_active =='1')
+            @if($type->is_active =='1')
             
             <td>  <span class="badge badge-success">Active</span> </td>
             
@@ -48,10 +48,10 @@
             
                 <form action="" method="POST">
       
-                <a class="btn btn-primary btn-sm" href="{{route('product_category.status',$category->id) }}">Status</a> 
-                
-                <a class="btn btn-primary btn-sm" href="{{route('product_category.edit',$category->id) }}">Edit</a>
-                <a class="btn btn-primary btn-sm" href="{{route('product_category.delete',$category->id) }}">Delete</a>
+                <a class="btn btn-primary btn-sm" href="{{route('product_type.status',$type->id) }}">Status</a> 
+
+                <a class="btn btn-primary btn-sm" href="{{route('product_type.edit',$type->id) }}">Edit</a> 
+                <a class="btn btn-primary btn-sm" href="{{route('product_type.delete',$type->id) }}">Delete</a> 
 
                 </form>
             </td>

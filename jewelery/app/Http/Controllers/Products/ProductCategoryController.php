@@ -53,7 +53,7 @@ class ProductCategoryController extends Controller{
 
       if($req->validate([
 
-        'name' => "required",
+        'name' => "required|unique:product_categories,name,{$req->id}",
         'is_active' => "required|digits_between:0,1"
 
       ])){
@@ -81,19 +81,25 @@ class ProductCategoryController extends Controller{
 
   public function edit(Request $req){
 
-        $id =  $req->id;
-        
-       $data_for_edit  = $this->product_category_model::where('id', $id)->get();
-     
-      //  return view('products',compact('data_for_edit'));     
+               
+       $data_for_edit  = $this->product_category_model::where('id', $req->id)->first()->toArray();
+         
+        return view('admin.EditProductCategory',['data_for_edit' => $data_for_edit]);     
       
   }
 
   public function update(Request $req){
 
-    //  $response = $this->product_category_model->where('id',$req->id)->update($req->all());
+    $validatedData = $req->validate([
 
-     //send back 
+      'name' => 'required',
+      'is_active' => 'required',
+    
+    ]);
+  
+     $response = $this->product_category_model->where('id',$req->id)->update($req->all());
+
+     return redirect()->route('product_category.list');
 
   }
 

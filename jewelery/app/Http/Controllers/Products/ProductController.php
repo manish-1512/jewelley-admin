@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\ProductCategoryModel;
 use App\Models\ProductModel;
+use App\Models\ProductTypeModel;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller{
@@ -39,6 +42,22 @@ class ProductController extends Controller{
                 return redirect()->back();
 
   } 
+
+        public function saveProductView(){
+
+            $category_model = new ProductCategoryModel();
+            $product_type_model = new ProductTypeModel();
+            
+            $categories = $category_model::all()->toArray();
+
+            $product_type = $product_type_model::all()->toArray();
+
+
+            return view('admin.SaveProduct',['categories' =>$categories ,'product_types' =>$product_type]);
+        
+        }
+
+
 
   public function create(Request $req){
 
@@ -78,9 +97,7 @@ class ProductController extends Controller{
                 $this->product_model->is_best_seller = $req->is_best_seller; 
 
                 if($req->id){   
-                    
-                   
-                
+                                       
 
                     $this->product_model->update();
 
@@ -103,19 +120,29 @@ class ProductController extends Controller{
       $id =  $req->id;
   
       $data_to_edit  = $this->product_model::where('id', $id)->first()->toArray();
+
+
+      $category_model = new ProductCategoryModel();
+            $product_type_model = new ProductTypeModel();
+            
+            $categories = $category_model::all()->toArray();
+
+            $product_type = $product_type_model::all()->toArray();
        
-     return view('admin.EditProduct',['data_to_edit' => $data_to_edit] );
+     return view('admin.EditProduct',['data_to_edit' => $data_to_edit,'categories' => $categories,'product_types' => $product_type] );
       
   }
 
-  public function update(Request $req){
+      public function update(Request $req){
 
+           
      $response = $this->product_model->where('id',$req->id)->update($req->all());
 
-     //send back 
-
+     return redirect()->route('product.list')->with('update','updated succesfully');
   }
 
+
+  
   public function delete(Request $req){
 
       $student = $this->product_model->where('id',$req->id)->delete();
