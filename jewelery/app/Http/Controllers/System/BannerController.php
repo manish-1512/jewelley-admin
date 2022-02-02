@@ -133,4 +133,21 @@ class BannerController extends Controller
         return redirect()->route('banner.list')
                         ->with('delete','BannerModel deleted successfully');
     }
+
+    public function changeStatus($id){
+
+           
+        $data =  BannerModel::select('is_active')->where('id',$id)->first()->toArray();
+
+        $status =($data['is_active'] == '1')?'0':'1';
+             
+        BannerModel::where('id',$id)->update(['is_active'=>$status ]);
+
+      return redirect()->back();
+
+
+
+    }
+
+
 }

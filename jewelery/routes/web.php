@@ -127,16 +127,22 @@ Route::get('/admin/System/banner/show','App\Http\Controllers\System\BannerContro
 Route::get('/admin/System/banner/edit/{id}','App\Http\Controllers\System\BannerController@edit')->name('banner.edit');
 Route::Post('/admin/System/banner/update','App\Http\Controllers\System\BannerController@update')->name('banner.update'); //not done
 
-Route::view('/admin/System/banner/save','admin.System.Banner')->name('banner_image.save');
+Route::view('/admin/System/banner/save/','admin.System.Banner')->name('banner_image.save');
 
-
+Route::get('/admin/System/banner/changeStatus/{id}','App\Http\Controllers\System\BannerController@changeStatus')->name('banner.status');
 
 ///////////////orders/////////////////
 
 
 
-Route::get('/admin/Orders/','App\Http\Controllers\Orders\OrderController@list')->name('orders.list');
+Route::get('/admin/Orders/{user_id?}/','App\Http\Controllers\Orders\OrderController@list')->name('orders.list');
 
+Route::get('/admin/Orders/details/{id}','App\Http\Controllers\Orders\OrderController@OrderDetails')->name('orders.order_details');
+
+//==================COupan code routes=====================
+
+
+Route::get('/admin/Discount/coupons','App\Http\Controllers\Offers\CouponController@list')->name('coupon_code.list');
 
 
 
@@ -152,3 +158,23 @@ Route::get('razor-thank-you', 'App\Http\Controllers\Website\RazorpayController@R
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//////////////////////////////////
+    
+use App\Http\Controllers\ExcelController;
+  
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+  
+Route::get('importExportView', [ExcelController::class, 'importExportView']);
+Route::get('export', [ExcelController::class, 'export'])->name('export');
+Route::post('import', [ExcelController::class, 'import'])->name('import');

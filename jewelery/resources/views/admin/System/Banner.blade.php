@@ -55,6 +55,7 @@
 
               
                     <a class="btn btn-info" href="{{ route('banner.show',$banner->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('banner.status',$banner->id) }}">Status</a>
                     <a class="btn btn-primary" href="{{ route('banner.edit',$banner->id) }}">Edit</a>
                     <a class="btn btn-danger" href="{{ route('banner.delete',$banner->id) }}">Delete</a>
                    

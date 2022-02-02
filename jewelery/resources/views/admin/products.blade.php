@@ -67,11 +67,15 @@
 
             
    
-                    <a class="btn btn-info" href="{{ route('product.view_detail',$product->id) }}">Show</a>
+                    <a class="btn btn-sm btn-info" href="{{ route('product.view_detail',$product->id) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('product.edit',$product->id) }}">Edit</a>
-                    <a class="btn btn-primary" href="{{ route('product.status',$product->id) }}">Status</a>
-                    <a class="btn btn-primary" href="{{ route('product.delete',$product->id) }}">Delete</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('product.edit',$product->id) }}">Edit</a>
+                    <a class=" btn btn-sm  btn-primary" href="{{ route('product.status',$product->id) }}">Status</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('product.delete',$product->id) }}">Delete</a>
+
+                    <a class="badge badge-pill badge-danger" href="{{ route('product.status',$product->id) }}">New</a>
+                    <a class="badge badge-pill badge-warning" href="{{ route('product.status',$product->id) }}">Popular</a>
+                    <a class="badge badge-pill badge-success" href="{{ route('product.status',$product->id) }}">Best Seller</a>
 
             </td>
             

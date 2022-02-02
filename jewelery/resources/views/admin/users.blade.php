@@ -54,7 +54,7 @@
                 <form action="" method="POST">
       
                 <a class="btn btn-primary btn-sm" href="">Status</a>
-                <a class="btn btn-primary btn-sm" href="{{ route('user.orders',$user->id) }}">Orders</a>
+                <a class="btn btn-primary btn-sm" href="{{ route('orders.list',$user->id) }}">Orders</a>
 
                     @csrf
                     @method('DELETE')

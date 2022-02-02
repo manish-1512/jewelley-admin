@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderModel extends Model
+class OrderItemModel extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class OrderModel extends Model
     protected $fillable = [
         
     ];
-    protected $table = "orders";
+    protected $table = "order_items";
     protected $primaryKey ="id";
     public $timestamps =true;
     public $incrementing = true;

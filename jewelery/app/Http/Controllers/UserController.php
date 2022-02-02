@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,7 @@ class UserController extends Controller{
     
     public function index(){    
 
-        $user_data =  $this->user_model::get();
-       
+        $user_data =  $this->user_model::get();   
 
         return view('admin.users',compact('user_data'));
 
@@ -26,10 +26,12 @@ class UserController extends Controller{
 
 // show user orders history
 
-    public function userOrders(Request $req){
+    // public function userOrders(Request $req){
+        
+    //     $user_orders =  OrderModel::where('user_id',$req->user_id)->get()->toArray();  
 
-        return view('admin.UserOrders'  );
-    }
+    //     return view('admin.UserOrders'  );
+    // }
 
 
 

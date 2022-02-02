@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderModel extends Model
+class UserAddressModel extends Model
 {
     use HasFactory;
 
-
-    protected $fillable = [
-        
-    ];
-    protected $table = "orders";
+    protected $fillable = ['id', 'user_id'];
+    protected $table = "user_addresses";
     protected $primaryKey ="id";
     public $timestamps =true;
     public $incrementing = true;
-
+    
 }
