@@ -302,6 +302,14 @@ border-bottom-right-radius: 15px;
           </li>
 
           <li class="nav-item">
+            <a href="{{route('contact_us.list')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p> Contact Us</p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
             <a href="{{route('orders.list')}}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p> Orders </p>

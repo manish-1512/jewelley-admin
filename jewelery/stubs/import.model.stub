@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Imports;
+namespace DummyNamespace;
 
-use App\Models\User;
+use DummyFullModelClass;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class UsersImport implements ToModel
+class DummyClass implements ToModel
 {
     /**
     * @param array $row
@@ -14,7 +14,7 @@ class UsersImport implements ToModel
     */
     public function model(array $row)
     {
-        return new User([
+        return new DummyModelClass([
             //
         ]);
     }

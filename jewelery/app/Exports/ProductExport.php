@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\User;
+use App\Models\ProductModel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class UsersExport implements FromCollection
+class ProductExport implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return User::all();
+        return ProductModel::all();
     }
 }

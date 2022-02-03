@@ -80,9 +80,16 @@ Route::get('/admin/Products/edit/{id}','App\Http\Controllers\Products\ProductCon
 
 Route::Post('/admin/Products/update','App\Http\Controllers\Products\ProductController@update')->name('product.update');
 
-
-
 Route::get('/admin/Products/delete/{id}','App\Http\Controllers\Products\ProductController@delete')->name('product.delete');
+
+Route::get('/admin/Products/status/new/{id}','App\Http\Controllers\Products\ProductController@changeStatusNew')->name('product.new');
+Route::get('/admin/Products/status/popular/{id}','App\Http\Controllers\Products\ProductController@changeStatusPopular')->name('product.popular');
+Route::get('/admin/Products/status/best_seller/{id}','App\Http\Controllers\Products\ProductController@changeStatusBestSeller')->name('product.best_seller');
+
+
+
+
+
 //route for product type list
 
 Route::get('/admin/Products/product_type/','App\Http\Controllers\Products\ProductTypeController@index')->name('product_type.list');
@@ -175,6 +182,16 @@ use App\Http\Controllers\ExcelController;
 |
 */
   
-Route::get('importExportView', [ExcelController::class, 'importExportView']);
+Route::get('admin/importExportView', [ExcelController::class, 'importExportView'])->name('excel_input.view');
 Route::get('export', [ExcelController::class, 'export'])->name('export');
 Route::post('import', [ExcelController::class, 'import'])->name('import');
+
+//================Contact us =======================//
+
+Route::get('admin/contact_us/', 'App\Http\Controllers\Contact\ContactUsController@list')->name('contact_us.list');
+Route::get('admin/contact_us/view/{id}', 'App\Http\Controllers\Contact\ContactUsController@view')->name('contact_us.view');
+
+
+//========================mail =============
+
+Route::post('/admin/contact/send_mail/','App\Http\Controllers\Contact\ContactUsController@replyMail')->name('send_mail');
