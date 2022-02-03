@@ -3,12 +3,27 @@
 @section('content')
 
 <div class="row">
-<div class="col-lg-12 margin-tb">
+<div class="col-lg-4 margin-tb">
    
     <div class="pull-left m-3">
         <a class="btn btn-success" href=""> Add New User</a>
     </div>
 </div>
+
+<div class="col-lg-6">
+  <form action="{{route('users.show')}}" method="Get">
+
+    <div class="input-group">
+      <input type="search" class="form-control rounded" name="query" placeholder="Enter name, email,or mobile  " aria-label="Search"  />
+      <button type="submit" class="btn btn-outline-primary">Search</button>
+
+      <a type="reset" href="{{route('users.show')}}" class="btn mx-2 btn-outline-primary">Reset</a>
+
+    </div>
+
+  </form>
+</div>
+
 </div>
 <!--table start here  -->
 

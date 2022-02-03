@@ -53,8 +53,12 @@ class ContactUsController extends Controller
      * @param  \App\Models\ContactUSModel  $contactUSModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactUSModel $contactUSModel)
+    public function delete($id)
     {
-        //
+        
+            ContactUSModel::where('id',$id)->delete();
+            //send back
+            return redirect()->back()->with('status','Student Deleted Successfully');
+        
     }
 }

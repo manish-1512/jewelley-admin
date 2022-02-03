@@ -50,7 +50,7 @@ Route::post('/admin/about_us/update','App\Http\Controllers\Settings\AboutUSContr
 
 //user controller
 //list of user
-Route::get('/admin/users/','App\Http\Controllers\UserController@index')->name('users.show');
+Route::get('/admin/users/{query?}','App\Http\Controllers\UserController@index')->name('users.show');
 //show user orders
 Route::get('/admin/user/orders/{user_id}','App\Http\Controllers\UserController@userOrders')->name('user.orders');
 
@@ -189,6 +189,7 @@ Route::post('import', [ExcelController::class, 'import'])->name('import');
 //================Contact us =======================//
 
 Route::get('admin/contact_us/', 'App\Http\Controllers\Contact\ContactUsController@list')->name('contact_us.list');
+Route::get('admin/contact_us/delete/{id}/', 'App\Http\Controllers\Contact\ContactUsController@delete')->name('contact_us.delete');
 Route::get('admin/contact_us/view/{id}', 'App\Http\Controllers\Contact\ContactUsController@view')->name('contact_us.view');
 
 

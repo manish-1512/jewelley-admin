@@ -16,9 +16,21 @@ class UserController extends Controller{
     }
 
     
-    public function index(){    
+    public function index(Request $req){    
 
-        $user_data =  $this->user_model::get();   
+        $query = $req->input('query');
+
+        if($query){
+            
+            $user_data =  $this->user_model::where('first_name', 'LIKE', '%'.$query.'%')
+                    ->orWhere('last_name', 'LIKE', '%'.$query.'%')
+                    ->orWhere('email', 'LIKE', '%'.$query.'%')   
+                    ->orWhere('mobile', 'LIKE', '%'.$query.'%')->get();   
+
+      }else{
+        $user_data =  $this->user_model::get();
+      }
+     
 
         return view('admin.users',compact('user_data'));
 

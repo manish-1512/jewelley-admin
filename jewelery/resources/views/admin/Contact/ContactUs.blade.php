@@ -55,11 +55,9 @@
       
                 <a class="btn btn-primary btn-sm" href="{{route('contact_us.view',$contact_us['id'])}}">View</a>
                 <a class="btn btn-primary btn-sm" href="{{route('contact_us.view',$contact_us['id'])}}">Reply</a>
+                <a class="btn btn-danger btn-sm" href="{{route('contact_us.delete',$contact_us['id'])}}">Delete</a>
 
-                    @csrf
-                    @method('DELETE')
-      
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                   
                 </form>
             </td>
             

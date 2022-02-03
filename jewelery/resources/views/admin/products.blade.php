@@ -100,7 +100,7 @@
               </div>
 
 
-              <div class="col-12">
+              <div class="col-12 ">
                   
               <a class="badge badge-pill badge-danger" href="{{ route('product.new',$product->id) }}">New</a>
                     <a class="badge badge-pill badge-warning" href="{{ route('product.popular',$product->id) }}">Popular</a>
