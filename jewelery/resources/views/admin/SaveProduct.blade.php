@@ -16,6 +16,9 @@
 @endif
 
 <form class="m-5" method="POST" action="{{route('product.create')}}">
+
+  @csrf
+  
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="title">Name</label>

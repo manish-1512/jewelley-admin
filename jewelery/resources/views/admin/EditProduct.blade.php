@@ -17,6 +17,7 @@
 <h2>edit product</h2>
 
 <form class="m-5" method="post" action="{{route('product.update')}}" >
+  @csrf
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="title">Name</label>

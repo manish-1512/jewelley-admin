@@ -14,7 +14,7 @@
   <form action="{{route('users.show')}}" method="Get">
 
     <div class="input-group">
-      <input type="search" class="form-control rounded" name="query" placeholder="Enter name, email,or mobile  " aria-label="Search"  />
+      <input type="search" class="form-control rounded mr-4 name="query" placeholder="Enter name, email,or mobile  " aria-label="Search"  />
       <button type="submit" class="btn btn-outline-primary">Search</button>
 
       <a type="reset" href="{{route('users.show')}}" class="btn mx-2 btn-outline-primary">Reset</a>
@@ -26,7 +26,7 @@
 
 </div>
 <!--table start here  -->
-
+<div class="table-responsive">
 <table class="table table-striped  table-bordered table-dark">
 <thead>
             <tr>
@@ -84,6 +84,6 @@
           </tbody>
           <!--Table body-->
   @endif
-</table>
-
+  </table>
+</div>
   @endsection

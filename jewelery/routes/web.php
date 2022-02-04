@@ -196,3 +196,11 @@ Route::get('admin/contact_us/view/{id}', 'App\Http\Controllers\Contact\ContactUs
 //========================mail =============
 
 Route::post('/admin/contact/send_mail/','App\Http\Controllers\Contact\ContactUsController@replyMail')->name('send_mail');
+
+
+
+//===============================route for front end======================
+
+
+Route::post('/login','App\Http\Controllers\Frontend\loginController@message');
+Route::post('/login/otp_verify','App\Http\Controllers\Frontend\loginController@verifyOtp');

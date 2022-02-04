@@ -22,7 +22,7 @@ class ProductController extends Controller{
     
     public function index(){    
       
-        $product_data =  $this->product_model::get();
+        $product_data =  $this->product_model::orderBy('created_at', 'DESC')->get();
 
         return view('admin.products',compact('product_data'));
   }
@@ -61,6 +61,8 @@ class ProductController extends Controller{
 
   public function create(Request $req){
 
+              
+
                if($req->validate([
               
                  
@@ -98,7 +100,7 @@ class ProductController extends Controller{
 
                 if($req->id){   
                                        
-
+               
                     $this->product_model->update();
 
                 }else{
@@ -135,8 +137,9 @@ class ProductController extends Controller{
 
       public function update(Request $req){
 
-           
-     $response = $this->product_model->where('id',$req->id)->update($req->all());
+       $input = $req->except(['_token']);
+
+     $response = $this->product_model->where('id',$req->id)->update($input);
 
      return redirect()->route('product.list')->with('update','updated succesfully');
   }
