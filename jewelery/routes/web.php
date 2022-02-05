@@ -170,7 +170,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //////////////////////////////////
     
 use App\Http\Controllers\ExcelController;
-  
+use Maatwebsite\Excel\Row;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -204,3 +205,16 @@ Route::post('/admin/contact/send_mail/','App\Http\Controllers\Contact\ContactUsC
 
 Route::post('/login','App\Http\Controllers\Frontend\loginController@message');
 Route::post('/login/otp_verify','App\Http\Controllers\Frontend\loginController@verifyOtp');
+
+
+Route::post('/Contact_us/save/','App\Http\Controllers\Frontend\ContactUsController@create');
+
+Route::post('User/profile/edit/','App\Http\Controllers\Frontend\UserController@editProfileDetails');
+
+Route::post('User/profile/details/','App\Http\Controllers\Frontend\UserController@ProfileDetails');
+
+
+
+Route::post('User/profile/image/','App\Http\Controllers\Frontend\UserController@updateUserImage');
+
+

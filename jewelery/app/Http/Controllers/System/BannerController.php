@@ -101,7 +101,7 @@ class BannerController extends Controller
             'is_active' => 'required'
         ]);
   
-        $input = $request->all();
+       
   
         if ($image = $request->file('image')) {
             $destinationPath = 'image/';

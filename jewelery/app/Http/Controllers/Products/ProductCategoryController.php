@@ -54,7 +54,8 @@ class ProductCategoryController extends Controller{
       if($req->validate([
 
         'name' => "required|unique:product_categories,name,{$req->id}",
-        'is_active' => "required|digits_between:0,1"
+        'is_active' => "required|digits_between:0,1",
+        'image' => 'required|image|mimes:png|max:2048'
 
       ])){
 

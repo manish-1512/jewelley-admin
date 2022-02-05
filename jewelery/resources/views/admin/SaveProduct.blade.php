@@ -15,7 +15,7 @@
     </div>
 @endif
 
-<form class="m-5" method="POST" action="{{route('product.create')}}">
+<form class="m-5" method="POST" action="{{route('product.create')}}" enctype="multipart/form-data" >
 
   @csrf
   
@@ -132,6 +132,12 @@
         <option value="0">No</option>
       
         </select>
+
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputZip">Product image</label>
+       <input type="file" name="image"  class="form-control"> 
 
     </div>
 

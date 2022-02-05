@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\UserModel;
 use DateInterval;
 use DateTime;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Nexmo\Laravel\Facade\Nexmo;
+use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class LoginController extends Controller
 {
@@ -15,7 +17,7 @@ class LoginController extends Controller
     protected $user_model;
 
     public $text_key = "123456789";
-
+    
     public function __construct()
     {
         $this->user_model = new UserModel();
@@ -26,7 +28,7 @@ class LoginController extends Controller
 
         $data = $req->json()->all();     
 
-        if($this->text_key == $data['key']){
+        if($this->text_key == $data['key'] && $data['mobile']){
 
                   $otp =rand(100000,999999);
             
@@ -46,18 +48,55 @@ class LoginController extends Controller
 
                         if($this->user_model::select('id','mobile')->where('mobile',$data['mobile'])->exists()){
 
-                           $user_data =  $this->user_model::select('id','mobile')->where('mobile',$data['mobile'])->first();
+                                $user_data =  $this->user_model::select('id','mobile')->where('mobile',$data['mobile'])->first();
 
-                           $this->user_model::where('mobile',$data['mobile'])->update(['otp' => $otp ,'otp_time' => $this->user_model->otp_time]);
+                                    if($this->user_model::where('mobile',$data['mobile'])->update(['otp' => $otp ,'otp_time' => $this->user_model->otp_time])){
+
+                                            return response()->json([
+                    
+                                                    "status" => "success",
+                                                    "message" => "otp send to your mobile no ",
+                                                    "data" => []
+                    
+                                            ]);
+                                    }else{
+
+                                        return response()->json([
+                    
+                                            "status" => "failed",
+                                            "message" => " not updated ",
+                                            "data" => []
+            
+                                    ],500);
+
+                                    }
                             
-                           return response()->json("otp send to your mobile no");
                             
                            
                         }else{
 
-                            $status = $this->user_model->save();
+                                if($status = $this->user_model->save()){
 
-                            return response()->json("otp send to your mobile no");
+                                            return response()->json([
+                                        
+                                                "status" => "success",
+                                                "message" => "otp send to your mobile no ",
+                                                "data" => []
+                                        ]);
+
+                                    }else{
+
+                                                return response()->json([
+                                
+                                                    "status" => "failed",
+                                                    "message" => " not updated ",
+                                                    "data" => []
+
+                                            ],500);
+                                    }
+
+
+
                         }        
                         
                     }
@@ -65,7 +104,11 @@ class LoginController extends Controller
                     
         }else{
 
-            return response()->json("not a mamber");
+           return response()->json([
+                                       "status" => "failed",
+                                       "message" => " validation error ",
+                                       "data" => []
+                                           ],401);
         }
 
            
@@ -78,7 +121,7 @@ class LoginController extends Controller
 
             if( $this->text_key == $data['key'] ){
 
-               $user_data =  $this->user_model::select('mobile','otp','otp_time')->where('mobile',$data['mobile'])->first()->toArray();
+               $user_data =  $this->user_model::select('id','mobile','otp','otp_time')->where('mobile',$data['mobile'])->first()->toArray();
 
                 if($data['otp'] == $user_data['otp']){
                                  
@@ -93,21 +136,53 @@ class LoginController extends Controller
 
                     if($current_time < $stamp ){
 
-                        return response()->json("you are log in " ,200);
+
+                            //null the otp and otp time 
+                            $this->user_model::where('mobile',$data['mobile'])->update(['otp' => null ,'otp_time' => null]);
+
+                        //please save data in to session 
+
+                        $req->Session()->put('login_id',$user_data['id']);
+
+                    // Session::put('variableName', $value);
+
+                            return response()->json([
+                                            
+                                "status" => "success",
+                                "message" => "you are now log in ! ",
+                                "data" => []
+                        ]);
+
                     }else{
 
-                        return response()->json("otp expire");
+                        return response()->json([
+                                            
+                            "status" => "failed",
+                            "message" => "otp expire ! ",
+                            "data" => []
+                    ]);
                     }
                     
                 }else{
 
-                    return response()->json("invalid otp");
+                    return response()->json([
+                                            
+                        "status" => "failed",
+                        "message" => "invalid otp ! ",
+                        "data" => []
+                 ]);
+
                 }                  
 
 
             }else{
                 
-                return response()->json("not a valid  mamber");
+                return response()->json([
+                                            
+                    "status" => "failed",
+                    "message" => "you are not a  valid mamber ! ",
+                    "data" => []
+             ]);
             }
 
 

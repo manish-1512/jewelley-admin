@@ -40,7 +40,7 @@
             <td>
                   <div class="row">
                 <div class="col-6 text-truncate">
-                    Praeterea iter est quasdam res quas ex communi.
+                    {{$contact_us['message']}}
                 </div>
                 </div>
 

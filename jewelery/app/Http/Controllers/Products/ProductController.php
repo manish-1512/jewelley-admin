@@ -62,11 +62,11 @@ class ProductController extends Controller{
   public function create(Request $req){
 
               
-
                if($req->validate([
               
                  
                 "title" => "required",
+                'image' => 'required|image|mimes:png|max:2048',
                 "description" => "required" ,
                 "price" => "required" ,
                 "weight" => "required" ,
@@ -97,6 +97,15 @@ class ProductController extends Controller{
                 $this->product_model->is_new = $req->is_new;
                 $this->product_model->is_popular = $req->is_popular; 
                 $this->product_model->is_best_seller = $req->is_best_seller; 
+
+                if ($image = $req->file('image')) {
+                    $destinationPath = 'image/product/';
+                    $productImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                    $image->move($destinationPath, $productImage);
+                    $this->product_model->image = "$productImage";
+                }
+
+
 
                 if($req->id){   
                                        
@@ -137,11 +146,33 @@ class ProductController extends Controller{
 
       public function update(Request $req){
 
-       $input = $req->except(['_token']);
+        if($req->validate([
+              
+                 
+            "title" => "required",
+            "description" => "required" ,
+            "price" => "required" ,
+            "weight" => "required" ,
+            "discount" => "required", 
+            "product_category" => "required", 
+            "product_type" => "required" ,
+            "product_matrial" => "required", 
+            "is_active" => "required" ,
+            "is_new" => "required" ,
+            "is_popular" => "required", 
+            "is_best_seller" => "required" 
+           
+         ])){
 
-     $response = $this->product_model->where('id',$req->id)->update($input);
 
-     return redirect()->route('product.list')->with('update','updated succesfully');
+            $input = $req->all();
+
+                $input = $req->except(['_token']);
+        
+            $response = $this->product_model->where('id',$req->id)->update($input);
+
+            return redirect()->route('product.list')->with('update','updated succesfully');
+         }
   }
 
 
