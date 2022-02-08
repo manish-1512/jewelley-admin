@@ -13,6 +13,19 @@
 </div>
 <!--table start here  -->
 
+@if(session()->has('delete'))
+
+<div class="alert alert-warning alert-dismissible float-right w-25 fade show" role="alert">
+   Your Data is deleted  .
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+</div>
+@endif
+
+
+
 
 
 <table class="table table-striped  table-bordered table-dark">
@@ -28,11 +41,11 @@
           <!--Table body-->
           <tbody>
          
-           <?php $i=0; ?>
+        
 
           @foreach ($product_category_data as $category)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $category->id }}</td>
             <td>{{ $category->name }}</td>
             
             @if($category->is_active =='1')

@@ -11,10 +11,10 @@
 </div>
 
 <div class="col-lg-6">
-  <form action="{{route('users.show')}}" method="Get">
+  <form action="{{route('users.show')}}" method="Get" >
 
     <div class="input-group">
-      <input type="search" class="form-control rounded mr-4 name="query" placeholder="Enter name, email,or mobile  " aria-label="Search"  />
+      <input type="search" class="form-control rounded mr-4" name="query" placeholder="Enter name, email,or mobile  " aria-label="Search"  />
       <button type="submit" class="btn btn-outline-primary">Search</button>
 
       <a type="reset" href="{{route('users.show')}}" class="btn mx-2 btn-outline-primary">Reset</a>
@@ -39,7 +39,8 @@
               <th>Pincode</th>
               <th>Country</th>
               <th>State</th>
-              <th>City</th>
+              <th>City</th> 
+              <th>Status</th>
               
               <th>Action</th>
             </tr>
@@ -63,13 +64,27 @@
             <td>{{ $user->state }}</td>
             <td>{{ $user->city }}</td>
 
+            @if($user->is_active =='1')
+            
+            <td>  <span class="badge badge-success">Active</span> </td>
+            
+         @else
+           <td><span class="badge badge-danger">Inactive</span></td>
+         
+         @endif 
+
+
             <td>
 
-            
-                <form action="" method="POST">
-      
-                <a class="btn btn-primary btn-sm" href="">Status</a>
-                <a class="btn btn-primary btn-sm" href="{{ route('orders.list',$user->id) }}">Orders</a>
+                  <form action="" method="GET">
+
+                  <a class="btn btn-primary btn-sm" href="{{ route('user.status',$user->id) }}">Status</a>
+
+                   <a class="btn btn-primary btn-sm" href="{{ route('orders.list',$user->id) }}">Orders</a>
+
+                   <a class="btn btn-primary btn-sm" href="{{ route('user.show',$user->id) }}"> Show </a>
+
+
 
                     @csrf
                     @method('DELETE')

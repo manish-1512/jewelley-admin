@@ -53,6 +53,10 @@ Route::post('/admin/about_us/update','App\Http\Controllers\Settings\AboutUSContr
 Route::get('/admin/users/{query?}','App\Http\Controllers\UserController@index')->name('users.show');
 //show user orders
 Route::get('/admin/user/orders/{user_id}','App\Http\Controllers\UserController@userOrders')->name('user.orders');
+//change user active status 
+Route::get('/admin/user/status/{id}','App\Http\Controllers\UserController@changeStatus')->name('user.status');
+
+Route::get('/admin/user/show/{id}','App\Http\Controllers\UserController@UserShow')->name('user.show');
 
 
     
@@ -63,7 +67,12 @@ Route::view('/admin/dashboard','admin.dashboard')->name('dashboard.show');
 
 //route for show products
 
-Route::get('/admin/Products/','App\Http\Controllers\Products\ProductController@index')->name('product.list');
+Route::get('/admin/Products/{search_for?}','App\Http\Controllers\Products\ProductController@index')->name('product.list');
+
+//route for products for searching 
+
+Route::Post('/admin/Products/search/','App\Http\Controllers\Products\ProductController@searchProduct')->name('product.search');
+
 
 Route::get('/admin/Products/save','App\Http\Controllers\Products\ProductController@saveProductView')->name('product.add_new');
 
@@ -71,7 +80,7 @@ Route::get('/admin/Products/save','App\Http\Controllers\Products\ProductControll
 Route::Post('/admin/Products/create','App\Http\Controllers\Products\ProductController@create')->name('product.create');
 
 
-Route::get('/admin/Products/view','App\Http\Controllers\Products\ProductController@viewProduct')->name('product.view_detail');
+Route::get('/admin/Products/view/{id}','App\Http\Controllers\Products\ProductController@viewProduct')->name('product.view_detail');
 
 Route::get('/admin/Products/status/{id}','App\Http\Controllers\Products\ProductController@changeStatus')->name('product.status');
 

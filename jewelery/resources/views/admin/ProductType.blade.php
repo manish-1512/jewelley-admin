@@ -32,7 +32,7 @@
 
           @foreach ($product_type_data as $type)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{  $type->id }}</td>
             <td>{{ $type->name }}</td>
             
             @if($type->is_active =='1')

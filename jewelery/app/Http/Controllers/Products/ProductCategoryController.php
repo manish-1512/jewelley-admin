@@ -106,9 +106,9 @@ class ProductCategoryController extends Controller{
 
   public function delete(Request $req){
 
-    //   $student = $this->product_category_model->where('id',$req->id)->delete();
-    //   //send back
-    //   return redirect()->back()->with('status','Student Deleted Successfully');
+       $this->product_category_model->where('id',$req->id)->delete();
+    
+      return redirect()->back()->with('delete','category  Deleted Successfully');
   }
 
 

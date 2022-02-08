@@ -36,6 +36,34 @@ class UserController extends Controller{
 
     }
 
+
+    public function changeStatus($id){
+
+        
+    $data =  $this->user_model::select('is_active')->where('id',$id)->first()->toArray();
+
+    $status =($data['is_active'] == '1')?'0':'1';
+
+        $this->user_model::where('id',$id)->update(['is_active'=> $status ]);
+
+        return redirect()->back();
+
+    }
+
+
+    //this is for see user details 
+
+    public function UserShow($user_id){
+
+            $user_data =  $this->user_model::select('id','first_name','last_name','mobile','email','gender','country','state','city','address','image','is_active','created_at','updated_at')->first()->toArray();
+
+            return view('admin.Showuser',['user_data' => $user_data]);
+
+    }
+
+
+
+
 // show user orders history
 
     // public function userOrders(Request $req){

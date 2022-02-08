@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\CategoryModel;
 use App\Models\ProductCategoryModel;
 use App\Models\ProductModel;
 use App\Models\ProductTypeModel;
@@ -19,16 +19,68 @@ class ProductController extends Controller{
 
         }
 
-    
-    public function index(){    
-      
-        $product_data =  $this->product_model::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.products',compact('product_data'));
+            public function searchProduct(Request $req){
+
+                       $input =  $req->input();
+                       
+                     $data =  $this->product_model::orderBy('created_at','DESC');
+
+                     if($input['product_category']){
+
+                        $data = $this->product_model::where('product_category',$input['product_category']);
+                     }
+
+                     if($input['product_type']){
+
+                        $data = $this->product_model::where('product_type',$input['product_type']);
+                     }
+                     if($input['query']){
+
+                        $data = $this->product_model::where('title','LIKE', "%" . $input['query'] . "%");
+                     }
+                     
+                     $product_data = $data->get();
+                     
+                     
+                     $product_categories = ProductCategoryModel::SELECT("id","name")->get()->toArray();
+
+                     $product_type =  ProductTypeModel::select("id","name")->get()->toArray();   
+                     
+                   
+                     return view('admin.products',compact('product_data','product_categories','product_type'));
+
+
+            }    
+
+
+
+    
+    public function index($search_for = null){
+        
+        if(!empty($search_for)){
+
+            $product_data =  $this->product_model::where($search_for,'1')->orderBy('created_at', 'DESC')->get();
+
+        }else{
+            
+            $product_data =  $this->product_model::orderBy('created_at', 'DESC')->get();
+        }
+
+        $product_categories = ProductCategoryModel::SELECT("id","name")->get()->toArray();
+
+        $product_type =  ProductTypeModel::select("id","name")->get()->toArray();   
+        
+      
+        return view('admin.products',compact('product_data','product_categories','product_type'));
   }
 
-  public function viewProduct(){
-    
+  public function viewProduct($id){
+
+      $product_data =  $this->product_model::where('id',$id)->first()->toArray();
+
+      return view('admin.ShowProduct',['product_data' =>  $product_data] );
+
   }
 
   public function Changestatus(Request $req){

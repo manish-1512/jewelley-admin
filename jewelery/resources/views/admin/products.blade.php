@@ -2,6 +2,98 @@
    
 @section('content')
 
+<div class="col-lg-6 offset-3">
+  <form action="{{route('product.search')}}" method="POST" >
+
+    <div class="input-group">
+
+    <select name="product_category" class="form-control rounded" id="">
+
+    <option value="">Select Category</option>
+    <option value=""></option>
+
+      @if($product_categories)
+
+      @foreach($product_categories as $key => $val)
+
+      <option class="form-select" value="{{$product_categories[$key]['id']}}"> {{$product_categories[$key]['name']}}</option>
+
+      @endforeach
+
+    @endif  
+    
+     </select>
+
+      &ensp;
+
+      <select name="product_type" class="form-control rounded" id="">
+
+
+      <option value="">Select Product type </option>
+      <option value=""></option>
+
+      @if($product_type)
+
+      @foreach($product_type as $key => $val)
+
+      <option class="form-select" value="{{$product_type[$key]['id']}}"> {{$product_type[$key]['name']}}</option>
+
+      @endforeach
+
+      @endif  
+
+      </select>
+
+      &ensp;
+
+
+      <input type="search" class="form-control rounded mr-4" name="query" placeholder="Enter title   " aria-label="Search"  />
+
+      
+
+      <button type="submit" class="btn btn-outline-primary">Search</button>
+
+      <a type="reset" href="{{route('product.list')}}" class="btn mx-2 btn-outline-primary">Reset</a>
+
+    </div>
+
+  </form>
+
+  <br>
+  <div class="row">
+
+        <div class="col-5">
+          <div class="btn-group" role="group" aria-label="Basic example">
+          <a type="button" class="btn btn-danger" href="{{route('product.list','is_new')}}">New</a>
+          <a type="button" class="btn btn-success" href="{{route('product.list','is_best_seller')}}" >Best Seller</a>
+          <a type="button" class="btn btn-warning" href="{{route('product.list','is_popular')}}">Popular</a>
+        </div>
+
+        </div>
+
+      <div class="col-4">
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+
+          <a type="button" class="btn btn-success" href="{{route('product.list','is_active')}}">Active</a>
+         
+        </div>
+      </div>
+
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
 <div class="row">
 <div class="col-lg-6 margin-tb">
    
@@ -24,8 +116,12 @@
 
 @if(session()->has('update'))
 
-<div class="alert-success col-1 ">
-  {{session('update')}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   Your Data is updated .
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
 </div>
 @endif
 
@@ -34,7 +130,7 @@
 <table class="table table-striped  table-bordered table-dark">
 <thead>
             <tr>
-              <th>#</th>
+              <th>Id</th>
               <th>Title</th>
               <th>Description</th>
               <th>Price</th>
@@ -55,7 +151,7 @@
 
           @foreach ($product_data as $product)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $product->id }}</td>
             <td>{{ $product->title }}</td>
             <td>{{ $product->description }}</td>
             <td>{{ $product->price }}</td>
