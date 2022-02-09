@@ -29,9 +29,20 @@
       <input type="number" class="form-control" name="price">
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="description">Product Short Description</label>
+    <input type="text" class="form-control" name="short_description" placeholder=" please enter short description  ">
+  </div>
+
+
   <div class="form-group">
     <label for="description">Product Description</label>
-    <input type="text" class="form-control" name="description" placeholder=" this item is....">
+
+    <textarea name="description" id="" class="form-control" cols="30" rows="5">
+
+    </textarea>
+    
   </div>
 
   <div class="form-row">
@@ -43,7 +54,7 @@
 
     <div class="form-group col-md-4">
         <label for="">Discount</label>
-        <input type="text" class="form-control"  placeholder="enter discount" name="discount">
+        <input type="text" class="form-control"  placeholder="enter discount in % " name="discount">
     </div>
 
     <div class="form-group col-md-4">
@@ -137,7 +148,7 @@
 
     <div class="form-group col-md-4">
       <label for="inputZip">Product image</label>
-       <input type="file" name="image"  class="form-control"> 
+       <input type="file" name="image[]"  class="form-control" multiple> 
 
     </div>
 

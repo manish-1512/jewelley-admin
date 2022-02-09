@@ -25,12 +25,17 @@
                 <tbody>
                     
                     @foreach($product_data as  $key => $value)
-      
-                     <tr>
+
+                      @if($key == "image")
+
+                      @continue
+
+                      @endif
+                     <tr> 
                         <th >{{ $key }}</th>
                         <td>{{$value}}</td>
                      </tr>
-      
+                   
                     @endforeach                
                 </tbody>
              </table>  
@@ -42,7 +47,14 @@
 
     <div class="col-6">
 
-        <img src="/image/product/{{$product_data['image']}}" alt="{{$product_data['image']}}"  width="300px">
+          @if($product_data['image'])
+
+              @foreach($product_data['image'] as $image)
+
+           <img src="/image/product/{{$image}}" alt="{{$image}}"  width="300px">
+
+            @endforeach
+          @endif
     </div>
 
     </div>

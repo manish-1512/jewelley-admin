@@ -74,7 +74,7 @@ Route::get('/admin/Products/{search_for?}','App\Http\Controllers\Products\Produc
 Route::Post('/admin/Products/search/','App\Http\Controllers\Products\ProductController@searchProduct')->name('product.search');
 
 
-Route::get('/admin/Products/save','App\Http\Controllers\Products\ProductController@saveProductView')->name('product.add_new');
+Route::get('/admin/Products/save/add_new/','App\Http\Controllers\Products\ProductController@saveProductView')->name('product.add_new');
 
 
 Route::Post('/admin/Products/create','App\Http\Controllers\Products\ProductController@create')->name('product.create');

@@ -78,8 +78,9 @@ class ProductController extends Controller{
   public function viewProduct($id){
 
       $product_data =  $this->product_model::where('id',$id)->first()->toArray();
+           $product_data['image']  =  json_decode($product_data['image']);   
 
-      return view('admin.ShowProduct',['product_data' =>  $product_data] );
+              return view('admin.ShowProduct',['product_data' =>  $product_data] );
 
   }
 
@@ -96,15 +97,18 @@ class ProductController extends Controller{
   } 
 
         public function saveProductView(){
-
+      
             $category_model = new ProductCategoryModel();
+            
+
             $product_type_model = new ProductTypeModel();
             
             $categories = $category_model::all()->toArray();
 
             $product_type = $product_type_model::all()->toArray();
+    
 
-
+            
             return view('admin.SaveProduct',['categories' =>$categories ,'product_types' =>$product_type]);
         
         }
@@ -118,18 +122,21 @@ class ProductController extends Controller{
               
                  
                 "title" => "required",
-                'image' => 'required|image|mimes:png|max:2048',
+                'image' => 'required',
+                'image.*' => 'mimes:png|max:2048',
+
+                "short_description"=> "required",
                 "description" => "required" ,
-                "price" => "required" ,
-                "weight" => "required" ,
-                "discount" => "required", 
-                "product_category" => "required", 
-                "product_type" => "required" ,
+                "price" => "required|numeric|min:1" ,
+                "weight" => "required|numeric" ,
+                "discount" => "Sometimes|required|numeric", 
+                "product_category" => "required|numeric", 
+                "product_type" => "required|numeric" ,
                 "product_matrial" => "required", 
-                "is_active" => "required" ,
-                "is_new" => "required" ,
-                "is_popular" => "required", 
-                "is_best_seller" => "required" 
+                "is_active" => "required|numeric|min:0|max:1" ,
+                "is_new" => "required|numeric|min:0|max:1" ,
+                "is_popular" => "required|numeric|min:0|max:1", 
+                "is_best_seller" => "required|numeric|min:0|max:1" 
                
              ])){
 
@@ -139,6 +146,7 @@ class ProductController extends Controller{
 
                 $this->product_model->title =$req->title ;
                 $this->product_model->description = $req->description;
+                $this->product_model->short_description = $req->short_description;
                 $this->product_model->price =$req->price;
                 $this->product_model->weight =$req->weight;
                 $this->product_model->discount =$req->discount; 
@@ -150,11 +158,21 @@ class ProductController extends Controller{
                 $this->product_model->is_popular = $req->is_popular; 
                 $this->product_model->is_best_seller = $req->is_best_seller; 
 
-                if ($image = $req->file('image')) {
-                    $destinationPath = 'image/product/';
-                    $productImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                    $image->move($destinationPath, $productImage);
-                    $this->product_model->image = "$productImage";
+                if ($req->file('image')) {
+
+                    foreach($req->file('image') as $file){
+
+                    
+
+
+                            $destinationPath = 'image/product/';
+                            $productImage = date('YmdHis') . "." . $file->getClientOriginalExtension();
+                            $file->move($destinationPath, $productImage);
+
+                            $image_data[] = "$productImage";
+
+                    }
+                    $this->product_model->image = json_encode($image_data);
                 }
 
 
