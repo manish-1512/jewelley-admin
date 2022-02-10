@@ -159,6 +159,11 @@ Route::get('/admin/Orders/details/{id}','App\Http\Controllers\Orders\OrderContro
 
 
 Route::get('/admin/Discount/coupons','App\Http\Controllers\Offers\CouponController@list')->name('coupon_code.list');
+Route::get('/admin/Discount/coupan/save/','App\Http\Controllers\Offers\CouponController@saveCoupan')->name('coupon_code.save');
+Route::post('/admin/Discount/coupan/create/','App\Http\Controllers\Offers\CouponController@create')->name('coupon_code.create');
+Route::get('/admin/Discount/coupan/edit/{id}','App\Http\Controllers\Offers\CouponController@edit')->name('coupon_code.edit');
+Route::Post('/admin/Discount/coupan/update/','App\Http\Controllers\Offers\CouponController@update')->name('coupon_code.update');
+
 
 
 
