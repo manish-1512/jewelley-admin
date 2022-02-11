@@ -69,8 +69,8 @@
                     <td>
 
                   <a class="btn btn-sm btn-primary" href="{{route('coupon_code.edit',$value->id)}}">Edit</a>
-                  <a class=" btn btn-sm  btn-primary" href="">Status</a>
-                  <a class="btn btn-sm btn-danger" href="">Delete</a>
+                  <a class=" btn btn-sm  btn-primary" href="{{route('coupon_code.status',$value->id)}}">Status</a>
+                  <a class="btn btn-sm btn-danger" href="{{route('coupon_code.delete',$value->id)}}">Delete</a>
 
 
                     </td>

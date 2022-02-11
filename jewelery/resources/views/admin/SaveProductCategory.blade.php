@@ -15,11 +15,16 @@
 
 <div class="w-50 offset-2" >
 
-  <form  action="{{ route('product_category.create')}}" method="POST">
+  <form  action="{{ route('product_category.create')}}" method="POST" enctype="multipart/form-data">
   
     <div class="form-group">
       <label for="name">Category Name</label>
       <input type="text" class="form-control" placeholder="Enter category" name="name" id="name">
+    </div>
+
+    <div class="form-group">
+      <label for="image">Category Image</label>
+      <input type="file" class="form-control"  name="image" >
     </div>
     
     <div class="form-group">
@@ -27,7 +32,7 @@
   
       <select class="form-control" id="" name="is_active">
         <option value="1">Yes</option>
-        <option value="2">NO</option>          
+        <option value="0">NO</option>          
       </select>
      
     </div>

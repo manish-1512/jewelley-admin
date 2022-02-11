@@ -100,7 +100,7 @@ class CouponController extends Controller
         
             $coupon_data = CouponModel::where('id',$id)->first()->toArray();
 
-          
+
             $products = ProductModel::select("id","title")->get()->toArray();
             $categories = ProductCategoryModel::select("id","name")->get()->toArray();
 
@@ -156,12 +156,36 @@ class CouponController extends Controller
 
             $input = $req->all();
             $input = $req->except(['_token']);
+
     
-        $response = $coupon->where('id',$req->id)->update($input);
+                 $response = $coupon->where('id',$req->id)->update($input);
+                    return  redirect()->route('coupon_code.list');
 
          }
 
     }
+
+
+        
+  //change product status to new 
+
+  public function changeStatus(int $id){
+
+    $data =  CouponModel::select('is_active')->where('id',$id)->first()->toArray();;
+
+    $status =($data['is_active'] == '1')?'0':'1';
+
+            CouponModel::where('id',$id)->update(['is_active'=> $status ]);
+
+        return redirect()->back();
+  }
+
+
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -169,8 +193,11 @@ class CouponController extends Controller
      * @param  \App\Models\CouponModel  $couponModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CouponModel $couponModel)
+    public function destroy(int $id)
     {
-        //
+
+        CouponModel::where('id',$id)->delete();
+      //send back
+      return redirect()->back()->with('status','Student Deleted Successfully');
     }
 }

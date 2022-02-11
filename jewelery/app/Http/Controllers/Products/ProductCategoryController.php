@@ -49,7 +49,6 @@ class ProductCategoryController extends Controller{
 
   public function create(Request $req){
 
-        
 
       if($req->validate([
 
@@ -59,20 +58,28 @@ class ProductCategoryController extends Controller{
 
       ])){
 
-          
-                 $this->product_category_model->name = $req->name;
-                 $this->product_category_model->is_active = $req->is_active;
-                  $status =  $this->product_category_model->save();
+          $input = $req->all();
+
+                 if ($image = $req->file('image')) {
+                  $destinationPath = public_path().PRODUCT_CATEGORY_IMAGE_PATH;
+                  $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                  $image->move($destinationPath, $profileImage);
+                  $input['image'] = "$profileImage";
+              }else{
+                
+                  $input['image'] = "no-image.png";
+              }
+
+            
+
+                  $status =  $this->product_category_model::create($input);
+                
 
                   if($status){
 
                     return redirect()->route('product_category.list');
              }
                   
-         }else{
-
-            
-
          }
 
        
@@ -97,12 +104,24 @@ class ProductCategoryController extends Controller{
       'is_active' => 'required',
     
     ]);
-  
-     $response = $this->product_category_model->where('id',$req->id)->update($req->all());
 
-     return redirect()->route('product_category.list');
+      $input =  $req->all();
 
-  }
+    if ($image = $req->file('image')) {
+      $destinationPath = public_path().PRODUCT_CATEGORY_IMAGE_PATH;
+          $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+
+          $image->move($destinationPath, $profileImage);
+          $input['image'] = "$profileImage";
+      }else{
+         
+          $input['image'] = "no-image.png";
+      }
+        $response = $this->product_category_model->where('id',$input['id'])->update($input);
+
+        return redirect()->route('product_category.list');
+
+      }
 
   public function delete(Request $req){
 

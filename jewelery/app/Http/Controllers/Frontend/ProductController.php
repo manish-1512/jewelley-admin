@@ -20,9 +20,8 @@ class ProductController extends Controller
                 
                               $validator = Validator::make($req->all(), [   
 
-                                'category_id' => 'sometimes|required|category_id|numeric', 
-                                'keyword' => 'sometimes|required', 
-                              
+                                'category_id' => 'sometimes|required|numeric', 
+                                'offset' => 'sometimes|required|integer', 
                                 
                             ]);
                 
@@ -42,9 +41,27 @@ class ProductController extends Controller
                             }else{
 
                                 $data = $req->json()->all();
-                                    
 
-                                
+
+                                    $products_data = ProductModel::select("id","title")->orderBy('created_at','desc')->get()->toArray();
+
+
+                                    
+                                if(isset($data['category_id'])){
+
+                                    $products_data =    ProductModel::where('product_category',$data['category_id'])->get()->toArray();
+                                } 
+
+
+                             
+
+
+                                return response()->json([
+
+                                    "data" => $products_data
+                                ]);
+
+
 
                                 }       
                 }else{

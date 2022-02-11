@@ -31,8 +31,9 @@
 <table class="table table-striped  table-bordered table-dark">
 <thead>
             <tr>
-              <th>#</th>
+              <th>Id</th>
               <th>Name</th>
+              <th>Image</th>
               <th>status</th>
               <th>Action</th>
             </tr>
@@ -47,7 +48,15 @@
         <tr>
             <td>{{ $category->id }}</td>
             <td>{{ $category->name }}</td>
-            
+            <td>
+                @if($category->image)
+                <img src="{{ PRODUCT_CATEGORY_IMAGE_PATH.$category->image }}" width="120px" >
+                @else
+                <img src="{{NO_IMAGE_PATH}}" width="120px" >
+                @endif
+            </td>
+
+
             @if($category->is_active =='1')
             
             <td>  <span class="badge badge-success">Active</span> </td>

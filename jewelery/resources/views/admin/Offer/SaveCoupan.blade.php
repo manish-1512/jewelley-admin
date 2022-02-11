@@ -117,13 +117,13 @@
     <div class="form-group col-md-4">
       <label for="">Coupon Start Date & Time</label>
          
-      <input type="datetime-local" name="start_date_time" class="form-control">    
+      <input type="date" name="start_date_time" class="form-control">    
     </div>
 
 
     <div class="form-group col-md-4">
       <label for="inputState">Coupon End Date & Time</label>
-      <input type="datetime-local" class="form-control"   name="end_date_time">
+      <input type="date" class="form-control"   name="end_date_time">
     </div>  
 
   </div>

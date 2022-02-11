@@ -30,7 +30,7 @@
         
        
      
-         <div class="row">
+         <div class="row col-6">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
@@ -42,7 +42,11 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>IS active</strong>
-                    <textarea class="form-control" style="height:150px" name="is_active" placeholder="Detail">{{$data_for_edit['is_active']}}</textarea>
+                    <select name="is_active" id="" class="form-control">
+                       <option value="1"<?php echo($data_for_edit['is_active'] == "1")?"selected" : "" ?> >Yes</option> 
+                       <option value="0" <?php echo($data_for_edit['is_active'] == "0")?"selected" : "" ?>>No</option> 
+                    </select>
+                   
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -52,6 +56,14 @@
                     <img src="/image/{{$data_for_edit['image']}}" width="300px">
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Order by</strong>
+                    <input type="number" name="order_by" value="{{$data_for_edit['order_by']}}" class="form-control" placeholder="Name">
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>

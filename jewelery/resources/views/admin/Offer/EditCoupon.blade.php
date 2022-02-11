@@ -48,8 +48,8 @@
 
         <option value="" >Select </option>
 
-        <option value="flat">Flat</option>
-        <option value="per">Per</option>    
+        <option value="flat" <?php echo ($coupon_data['discount_type']== "flat")? "selected" :"" ;  ?>  >Flat</option>
+        <option value="per" <?php echo ($coupon_data['discount_type']== "per")? "selected" :"" ;  ?>  >Per</option>    
         </select> 
 
 
@@ -124,13 +124,13 @@
     <div class="form-group col-md-4">
       <label for="">Coupon Start Date & Time</label>
          
-      <input type="datetime-local" name="start_date_time" class="form-control" value="{{$coupon_data['start_date_time']}}">    
+      <input type="date" name="start_date_time" class="form-control" value="{{$coupon_data['start_date_time']}}">    
     </div>
 
 
     <div class="form-group col-md-4">
       <label for="inputState">Coupon End Date & Time</label>
-      <input type="datetime-local" class="form-control"   name="end_date_time" value="{{$coupon_data['end_date_time']}}">
+      <input type="date" class="form-control"   name="end_date_time" value="{{$coupon_data['end_date_time']}}">
     </div>  
 
   </div>
@@ -148,6 +148,8 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
+
+  
 </form>
 
 <script>

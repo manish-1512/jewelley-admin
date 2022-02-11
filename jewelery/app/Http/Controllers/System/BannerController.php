@@ -102,15 +102,18 @@ class BannerController extends Controller
         ]);
   
        
+        $input = $request->all();
   
         if ($image = $request->file('image')) {
             $destinationPath = 'image/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
+
             $input['image'] = "$profileImage";
         }else{
             unset($input['image']);
         }   
+
 
         $banner_model = new BannerModel();
           

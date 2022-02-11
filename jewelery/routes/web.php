@@ -163,6 +163,8 @@ Route::get('/admin/Discount/coupan/save/','App\Http\Controllers\Offers\CouponCon
 Route::post('/admin/Discount/coupan/create/','App\Http\Controllers\Offers\CouponController@create')->name('coupon_code.create');
 Route::get('/admin/Discount/coupan/edit/{id}','App\Http\Controllers\Offers\CouponController@edit')->name('coupon_code.edit');
 Route::Post('/admin/Discount/coupan/update/','App\Http\Controllers\Offers\CouponController@update')->name('coupon_code.update');
+Route::get('/admin/Discount/coupan/status/{id}','App\Http\Controllers\Offers\CouponController@changeStatus')->name('coupon_code.status');
+Route::get('/admin/Discount/coupan/delete/{id}','App\Http\Controllers\Offers\CouponController@destroy')->name('coupon_code.delete');
 
 
 
@@ -231,4 +233,9 @@ Route::post('User/profile/details/','App\Http\Controllers\Frontend\UserControlle
 
 Route::post('User/profile/image/','App\Http\Controllers\Frontend\UserController@updateUserImage');
 
+Route::post('/Product/Category/list','App\Http\Controllers\Frontend\CategoryController@categoryList');
 
+Route::post('/Banner/list/','App\Http\Controllers\Frontend\BannerController@bannerList');
+
+
+Route::post('/Product/list','App\Http\Controllers\Frontend\ProductController@list');
