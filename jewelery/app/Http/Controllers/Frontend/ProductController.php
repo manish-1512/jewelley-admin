@@ -31,8 +31,8 @@ class ProductController extends Controller
                                 return response()->json([
 
                                     'status' => "failed",
-                                     'message'=> "validation error" ,
-                                      "data" =>  [ 
+                                    'message'=> "validation error" ,
+                                    "data" =>  [ 
                                                      'errors'=>$validator->errors()
                                                  ]
                                 
@@ -42,19 +42,21 @@ class ProductController extends Controller
 
                                 $data = $req->json()->all();
 
-
-                                    $products_data = ProductModel::select("id","title")->orderBy('created_at','desc')->get()->toArray();
-
-
+                                    $products_data = ProductModel::select('id',"title","short_description","price","discount")
+                                                                    ->where('is_active',1)
+                                                                    ->orderBy('created_at','desc')
+                                                                    ->get()
+                                                                    ->toArray();
                                     
                                 if(isset($data['category_id'])){
 
-                                    $products_data =    ProductModel::where('product_category',$data['category_id'])->get()->toArray();
-                                } 
-
-
-                             
-
+                                    $products_data =    ProductModel::select('id',"title","short_description","price","discount")
+                                                                    ->where('is_active',1)
+                                                                    ->where('product_category',$data['category_id'])
+                                                                    ->get()
+                                                                    ->toArray();
+                                }   
+                                
 
                                 return response()->json([
 
